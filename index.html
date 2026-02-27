@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLSI Trends - Semiconductor Design Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-navy: #0A192F;
+            --tech-blue: #007BFF;
+            --neon-blue: #00E5FF;
+            --white: #FFFFFF;
+            --light-gray: #f5f7fa;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--white);
+            background-color: var(--dark-navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circuit-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
+            height: 1px;
+            width: 100%;
+            animation: moveLine 15s linear infinite;
+        }
+
+        @keyframes moveLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: rgba(0, 229, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 123, 255, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 229, 255, 0.2) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://picsum.photos/seed/vlsi-chip/1920/1080.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            flex: 1.2;
+            padding-right: 40px;
+        }
+
+        .hero-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+            position: relative;
+        }
+
+        .hero-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+        }
+
+        .hero-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 1.8rem;
+            color: var(--tech-blue);
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .hero-btn-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+            z-index: -1;
+        }
+
+        .hero-btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4);
+        }
+
+        .hero-btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--neon-blue);
+            padding: 15px 30px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-btn-secondary::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-blue);
+            transform: translateY(100%);
+            transition: transform 0.5s;
+            z-index: -1;
+        }
+
+        .hero-btn-secondary:hover::before {
+            transform: translateY(0);
+        }
+
+        .hero-btn-secondary:hover {
+            color: var(--dark-navy);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4);
+        }
+
+        .hero-image {
+            flex: 1;
+            height: 450px;
+            background-image: url('https://picsum.photos/seed/vlsi-chip-circuit/600/450.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .hero-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.2), rgba(0, 229, 255, 0.2));
+            z-index: 1;
+        }
+
+        .hero-image::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 15px 0;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-decoration: none;
+            padding: 20px 15px;
+            transition: var(--transition);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-link::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            color: var(--tech-blue);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--neon-blue);
+        }
+
+        .nav-link:hover i {
+            color: var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            position: relative;
+        }
+
+        .dropdown-link {
+            display: block;
+            color: var(--white);
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .dropdown-link::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--tech-blue), var(--neon-blue));
+            transform: scaleY(0);
+            transition: var(--transition);
+        }
+
+        .dropdown-link:hover::before {
+            transform: scaleY(1);
+        }
+
+        .dropdown-link:hover {
+            background-color: rgba(0, 123, 255, 0.1);
+            color: var(--neon-blue);
+            padding-left: 25px;
+        }
+
+        .dropdown-link i {
+            margin-right: 8px;
+            color: var(--tech-blue);
+            transition: var(--transition);
+        }
+
+        .dropdown-link:hover i {
+            color: var(--neon-blue);
+            transform: translateX(3px);
+        }
+
+        /* Nested Dropdown */
+        .nested-dropdown {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(10px);
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+        }
+
+        .dropdown-item:hover .nested-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Grid Section */
+        .grid-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .grid-item {
+            position: relative;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.3);
+            border-color: rgba(0, 229, 255, 0.3);
+        }
+
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+
+        .grid-item:hover .grid-bg {
+            transform: scale(1.1);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 25, 47, 0.7), rgba(0, 123, 255, 0.7));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .grid-item:hover .grid-overlay {
+            background: linear-gradient(to bottom, rgba(10, 25, 47, 0.8), rgba(0, 123, 255, 0.8));
+        }
+
+        .grid-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--neon-blue);
+            transition: var(--transition);
+        }
+
+        .grid-item:hover .grid-title {
+            transform: translateX(5px);
+        }
+
+        .grid-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background-color: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(0, 123, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--neon-blue);
+        }
+
+        .section-content {
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-content li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            transition: var(--transition);
+        }
+
+        .section-content li:hover {
+            transform: translateX(5px);
+        }
+
+        .section-content li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+
+        /* Page Navigation */
+        .page-nav {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .page-btn {
+            background: linear-gradient(135deg, var(--tech-blue), var(--neon-blue));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-btn::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .page-btn:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .page-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-link {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(0, 123, 255, 0.1);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--tech-blue), var(--neon-blue));
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            z-index: -1;
+        }
+
+        .social-link:hover::before {
+            transform: translateY(0);
+        }
+
+        .social-link:hover {
+            color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3);
+            border-color: transparent;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsive */
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+                padding: 60px 0;
+            }
+            
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-image {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(10, 25, 47, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .dropdown, .nested-dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: rgba(0, 123, 255, 0.1);
+            }
+
+            .grid-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg" id="animatedBg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">VLSI Trends</div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">
+                        <i class="fas fa-user"></i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#synthesis" class="nav-link">
+                        <i class="fas fa-cogs"></i> Synthesis
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#asic-flow" class="nav-link">
+                        <i class="fas fa-microchip"></i> ASIC Flow
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#physical-design" class="nav-link">
+                        <i class="fas fa-project-diagram"></i> Physical Design
+                        <i class="fas fa-chevron-down" style="margin-left: 5px;"></i>
+                    </a>
+                    <div class="dropdown">
+                        <div class="dropdown-item">
+                            <a href="#input-files" class="dropdown-link">
+                                <i class="fas fa-file-import"></i> Input Files
+                                <i class="fas fa-chevron-right" style="margin-left: auto;"></i>
+                            </a>
+                            <div class="nested-dropdown">
+                                <a href="#netlist" class="dropdown-link">Netlist</a>
+                                <a href="#library" class="dropdown-link">Library</a>
+                                <a href="#constraints" class="dropdown-link">Constraints</a>
+                            </div>
+                        </div>
+                        <a href="#prn-flow" class="dropdown-link">
+                            <i class="fas fa-sitemap"></i> PRN Flow
+                        </a>
+                        <a href="#floor-plan" class="dropdown-link">
+                            <i class="fas fa-th-large"></i> Floor Plan
+                        </a>
+                        <a href="#power-plan" class="dropdown-link">
+                            <i class="fas fa-bolt"></i> Power Plan
+                        </a>
+                        <a href="#placement" class="dropdown-link">
+                            <i class="fas fa-layer-group"></i> Placement
+                        </a>
+                        <a href="#cts" class="dropdown-link">
+                            <i class="fas fa-clock"></i> CTS
+                        </a>
+                        <a href="#routing" class="dropdown-link">
+                            <i class="fas fa-route"></i> Routing
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#sign-off" class="nav-link">
+                        <i class="fas fa-check-circle"></i> Sign Off
+                        <i class="fas fa-chevron-down" style="margin-left: 5px;"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#parasitic-extraction" class="dropdown-link">
+                            <i class="fas fa-project-diagram"></i> Parasitic Extraction
+                        </a>
+                        <a href="#physical-verification" class="dropdown-link">
+                            <i class="fas fa-shield-alt"></i> Physical Verification
+                        </a>
+                        <a href="#formal-verification" class="dropdown-link">
+                            <i class="fas fa-certificate"></i> Formal Verification
+                        </a>
+                        <a href="#static-timing-analysis" class="dropdown-link">
+                            <i class="fas fa-tachometer-alt"></i> Static Timing Analysis
+                        </a>
+                        <a href="#power-analysis" class="dropdown-link">
+                            <i class="fas fa-battery-full"></i> Power Analysis & IR Drop Analysis
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">VLSI Trends</h1>
+                <h2 class="hero-subtitle">Advanced Semiconductor Design Portfolio</h2>
+                <p class="hero-description">
+                    Welcome to the cutting-edge world of VLSI design. This portfolio showcases expertise in ASIC design flow, from concept to silicon. Explore the intricate processes of chip design, synthesis, and physical implementation that power the technology of tomorrow.
+                </p>
+                <div class="hero-btn-container">
+                    <a href="#basics" class="hero-btn">Explore My Work</a>
+                    <a href="#about" class="hero-btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Grid Section -->
+        <div class="grid-section">
+            <div class="grid-item" onclick="navigateToSection('basics')">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/asic-basics/600/400.jpg');"></div>
+                <div class="grid-overlay">
+                    <div class="grid-title">Basics</div>
+                    <div class="grid-description">Fundamentals of ASIC design, understanding the core concepts and terminologies used in the semiconductor industry.</div>
+                </div>
+            </div>
+            <div class="grid-item" onclick="navigateToSection('input-files')">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/input-files/600/400.jpg');"></div>
+                <div class="grid-overlay">
+                    <div class="grid-title">Input Files</div>
+                    <div class="grid-description">Essential files required for ASIC design including netlists, libraries, and constraint files.</div>
+                </div>
+            </div>
+            <div class="grid-item" onclick="navigateToSection('synthesis')">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/synthesis/600/400.jpg');"></div>
+                <div class="grid-overlay">
+                    <div class="grid-title">Synthesis</div>
+                    <div class="grid-description">Process of converting high-level design descriptions into gate-level netlists.</div>
+                </div>
+            </div>
+            <div class="grid-item" onclick="navigateToSection('floor-plan')">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/floorplan/600/400.jpg');"></div>
+                <div class="grid-overlay">
+                    <div class="grid-title">Floor Plan</div>
+                    <div class="grid-description">Creating the physical layout blueprint of the chip, defining block placement and I/O locations.</div>
+                </div>
+            </div>
+            <div class="grid-item" onclick="navigateToSection('placement')">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/placement/600/400.jpg');"></div>
+                <div class="grid-overlay">
+                    <div class="grid-title">Placement</div>
+                    <div class="grid-description">Optimally positioning standard cells on the chip to minimize wire length and improve performance.</div>
+                </div>
+            </div>
+            <div class="grid-item" onclick="navigateToSection('routing')">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/routing/600/400.jpg');"></div>
+                <div class="grid-overlay">
+                    <div class="grid-title">Routing</div>
+                    <div class="grid-description">Creating the physical connections between placed components following design rules.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div id="basics" class="content-section">
+            <h2 class="section-title">ASIC Design Basics</h2>
+            <div class="section-content">
+                <p>ASIC (Application-Specific Integrated Circuit) design is a specialized field of semiconductor engineering that focuses on creating integrated circuits tailored for specific applications. Unlike general-purpose processors, ASICs are optimized for particular functions, offering superior performance, power efficiency, and smaller form factors.</p>
+                <p>The ASIC design flow encompasses multiple stages, from specification to final tape-out. Each stage requires specialized tools and expertise to ensure the final chip meets performance, power, and area (PPA) targets while adhering to manufacturing constraints.</p>
+                <p>Key concepts in ASIC design include:</p>
+                <ul>
+                    <li>Design specification and architecture definition</li>
+                    <li>RTL (Register Transfer Level) design and verification</li>
+                    <li>Logic synthesis and optimization</li>
+                    <li>Physical implementation (placement, routing, etc.)</li>
+                    <li>Timing closure and sign-off verification</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="input-files" class="content-section">
+            <h2 class="section-title">Input Files</h2>
+            <div class="section-content">
+                <p>Input files are the foundation of the ASIC design process, providing all necessary information for synthesis and physical design tools. These files define the functionality, constraints, and manufacturing requirements of the chip.</p>
+                <p>Essential input files include:</p>
+                <ul>
+                    <li><strong>RTL Files:</strong> Hardware description language files (Verilog, VHDL) that describe the chip's functionality</li>
+                    <li><strong>Library Files:</strong> Standard cell libraries containing timing, power, and physical information</li>
+                    <li><strong>Constraint Files:</strong> SDC (Synopsys Design Constraints) files specifying timing, clock, and I/O constraints</li>
+                    <li><strong>Technology Files:</strong> Process technology files defining design rules and layer information</li>
+                    <li><strong>Configuration Files:</strong> Tool-specific configuration files for synthesis and place-and-route tools</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="synthesis" class="content-section">
+            <h2 class="section-title">Synthesis</h2>
+            <div class="section-content">
+                <p>Synthesis is the process of converting high-level RTL descriptions into gate-level netlists optimized for the target technology. This critical step transforms functional specifications into physical implementations while meeting timing, area, and power constraints.</p>
+                <p>The synthesis process involves:</p>
+                <ul>
+                    <li>Translation of RTL to generic technology-independent gates</li>
+                    <li>Logic optimization to minimize area and improve performance</li>
+                    <li>Technology mapping to target-specific standard cells</li>
+                    <li>Timing analysis and optimization to meet clock constraints</li>
+                    <li>Generation of gate-level netlist and reports</li>
+                </ul>
+                <p>Modern synthesis tools use advanced algorithms to explore the design space and find optimal implementations that balance competing requirements of performance, power, and area.</p>
+            </div>
+        </div>
+
+        <div id="floor-plan" class="content-section">
+            <h2 class="section-title">Floor Plan</h2>
+            <div class="section-content">
+                <p>Floor planning is a critical early step in physical design that defines the chip's overall layout structure. It involves determining the placement of major blocks, I/O pads, and power distribution networks to optimize performance and manufacturability.</p>
+                <p>Key aspects of floor planning include:</p>
+                <ul>
+                    <li>Die size and aspect ratio determination</li>
+                    <li>Macro block placement and orientation</li>
+                    <li>I/O pad placement and assignment</li>
+                    <li>Power grid design and placement</li>
+                    <li>Channel and routing region allocation</li>
+                </ul>
+                <p>A well-executed floor plan forms the foundation for successful placement and routing, directly impacting the chip's performance, power consumption, and yield.</p>
+            </div>
+        </div>
+
+        <div id="placement" class="content-section">
+            <h2 class="section-title">Placement</h2>
+            <div class="section-content">
+                <p>Placement is the process of positioning standard cells and macros within the floor plan to optimize timing, power, and area. This complex optimization problem requires balancing multiple competing objectives while adhering to design rules.</p>
+                <p>The placement process typically follows these steps:</p>
+                <ul>
+                    <li>Initial placement using analytical or force-directed methods</li>
+                    <li>Legalization to ensure all cells are placed on valid grid locations</li>
+                    <li>Timing-driven optimization to improve critical paths</li>
+                    <li>Congestion analysis and mitigation</li>
+                    <li>Power network optimization</li>
+                </ul>
+                <p>Modern placement tools use sophisticated algorithms including machine learning techniques to achieve near-optimal solutions for complex designs with millions of cells.</p>
+            </div>
+        </div>
+
+        <div id="routing" class="content-section">
+            <h2 class="section-title">Routing</h2>
+            <div class="section-content">
+                <p>Routing creates the physical connections between placed components, implementing the logical netlist in the physical domain. This multi-stage process must satisfy design rules while optimizing timing, signal integrity, and manufacturability.</p>
+                <p>The routing flow typically includes:</p>
+                <ul>
+                    <li>Global routing to determine approximate paths and estimate congestion</li>
+                    <li>Detailed routing to create actual metal connections following design rules</li>
+                    <li>Timing optimization through wire sizing and buffer insertion</li>
+                    <li>Signal integrity analysis and fixes</li>
+                    <li>Design rule checking and correction</li>
+                </ul>
+                <p>Advanced routing tools use multi-threading and specialized algorithms to handle the complexity of modern designs with multiple metal layers and stringent requirements.</p>
+            </div>
+        </div>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+            <button class="page-btn" id="prevBtn" onclick="navigatePage(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="page-btn" id="nextBtn" onclick="navigatePage(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="social-links">
+                <a href="mailto:contact@vlsitrends.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://instagram.com/vlsitrends" class="social-link" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com/in/vlsitrends" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://twitter.com/vlsitrends" class="social-link" target="_blank">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://youtube.com/@vlsitrends" class="social-link" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://wa.me/1234567890" class="social-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 VLSI Trends. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create animated background elements
+        function createAnimatedBackground() {
+            const animatedBg = document.getElementById('animatedBg');
+            
+            // Create circuit lines
+            for (let i = 0; i < 5; i++) {
+                const line = document.createElement('div');
+                line.classList.add('circuit-line');
+                line.style.top = `${20 + i * 20}%`;
+                line.style.animationDelay = `${i * 2}s`;
+                animatedBg.appendChild(line);
+            }
+            
+            // Create particles
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                animatedBg.appendChild(particle);
+            }
+        }
+
+        // Initialize animated background
+        createAnimatedBackground();
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Content sections for navigation
+        const contentSections = ['basics', 'input-files', 'synthesis', 'floor-plan', 'placement', 'routing'];
+        let currentSectionIndex = -1;
+
+        // Navigate to section when grid item is clicked
+        function navigateToSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                currentSectionIndex = contentSections.indexOf(sectionId);
+                
+                // Scroll to section
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Page navigation
+        function navigatePage(direction) {
+            if (currentSectionIndex === -1) {
+                currentSectionIndex = 0;
+            }
+            
+            currentSectionIndex += direction;
+            
+            // Wrap around if necessary
+            if (currentSectionIndex < 0) {
+                currentSectionIndex = contentSections.length - 1;
+            } else if (currentSectionIndex >= contentSections.length) {
+                currentSectionIndex = 0;
+            }
+            
+            navigateToSection(contentSections[currentSectionIndex]);
+        }
+
+        // Handle navigation links
+        document.querySelectorAll('.nav-link, .dropdown-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                if (href && href.startsWith('#')) {
+                    const sectionId = href.substring(1);
+                    
+                    // Check if section exists in content sections
+                    if (contentSections.includes(sectionId)) {
+                        navigateToSection(sectionId);
+                    } else {
+                        // For sections not in content sections, just scroll to the element if it exists
+                        const element = document.getElementById(sectionId);
+                        if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                    
+                    // Close mobile menu if open
+                    document.getElementById('navMenu').classList.remove('active');
+                }
+            });
+        });
+
+        // Handle hero buttons
+        document.querySelectorAll('.hero-btn, .hero-btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                if (href && href.startsWith('#')) {
+                    const sectionId = href.substring(1);
+                    
+                    if (sectionId === 'basics') {
+                        navigateToSection('basics');
+                    } else if (sectionId === 'about') {
+                        // Scroll to top of page for about
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
