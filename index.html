@@ -6,6 +6,8 @@
     <title>VLSI Trends - Semiconductor Design Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="responsiveness.css">
+
     <style>
         /* Base Styles */
         * {
@@ -407,7 +409,7 @@
             transform: translateX(0);
         }
 
-        /* Hero Section */
+        /* Hero Section - Fixed Positioning */
         .hero {
             display: flex;
             align-items: center;
@@ -435,7 +437,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://picsum.photos/seed/vlsi-chip/1920/1080.jpg');
+            background-image: url('https://i.postimg.cc/T273vkCh/Chat-GPT-Image-Feb-28-2026-04-53-43-PM.png');
             background-size: cover;
             background-position: center;
             opacity: 0.1;
@@ -454,7 +456,10 @@
         }
 
         .hero-content {
-            flex: 1.2;
+            flex: 1;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
             padding-right: 40px;
         }
 
@@ -462,7 +467,7 @@
             font-family: 'JetBrains Mono', monospace;
             font-weight: 700;
             font-size: 3.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             line-height: 1.1;
             background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
             -webkit-background-clip: text;
@@ -470,16 +475,19 @@
             background-clip: text;
             text-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
             position: relative;
+            animation: fadeInLeft 1s ease-out;
+            order: 1;
         }
 
         .hero-title::after {
             content: "";
             position: absolute;
-            bottom: -10px;
+            bottom: -12px;
             left: 0;
             width: 100px;
             height: 3px;
             background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            animation: expandWidth 1.5s ease-out;
         }
 
         .hero-subtitle {
@@ -489,6 +497,8 @@
             color: var(--tech-blue);
             margin-bottom: 30px;
             opacity: 0.9;
+            animation: fadeInLeft 1.2s ease-out;
+            order: 2;
         }
 
         .hero-description {
@@ -497,11 +507,15 @@
             max-width: 600px;
             line-height: 1.7;
             opacity: 0.8;
+            animation: fadeInLeft 1.4s ease-out;
+            order: 3;
         }
 
         .hero-btn-container {
             display: flex;
             gap: 20px;
+            animation: fadeInUp 1.6s ease-out;
+            order: 4;
         }
 
         .hero-btn {
@@ -509,14 +523,15 @@
             background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
             color: var(--white);
             padding: 15px 30px;
-            border-radius: 4px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            transform: translateY(0);
         }
 
         .hero-btn::before {
@@ -532,13 +547,32 @@
             z-index: -1;
         }
 
-        .hero-btn:hover::before {
-            transform: translateX(0);
+        .hero-btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
         }
 
         .hero-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4);
+        }
+
+        .hero-btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .hero-btn:hover::after {
+            width: 300px;
+            height: 300px;
         }
 
         .hero-btn-secondary {
@@ -547,13 +581,14 @@
             color: var(--neon-blue);
             padding: 15px 30px;
             border: 2px solid var(--neon-blue);
-            border-radius: 4px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            transform: translateY(0);
         }
 
         .hero-btn-secondary::before {
@@ -569,8 +604,18 @@
             z-index: -1;
         }
 
-        .hero-btn-secondary:hover::before {
-            transform: translateY(0);
+        .hero-btn-secondary::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
         }
 
         .hero-btn-secondary:hover {
@@ -579,17 +624,28 @@
             box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4);
         }
 
+        .hero-btn-secondary:hover::before {
+            transform: translateY(0);
+        }
+
+        .hero-btn-secondary:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
         .hero-image {
             flex: 1;
             height: 450px;
-            background-image: url('https://picsum.photos/seed/vlsi-chip-circuit/600/450.jpg');
+            background-image: url('https://i.postimg.cc/qB51dfYv/Chat-GPT-Image-Feb-28-2026-05-15-57-PM.png');
             background-size: cover;
             background-position: center;
-            border-radius: 10px;
+            border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0, 229, 255, 0.2);
+            animation: fadeInRight 1.5s ease-out;
+            max-width: 500px;
         }
 
         .hero-image::before {
@@ -618,6 +674,26 @@
         @keyframes shine {
             0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes fadeInLeft {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            0% { opacity: 0; transform: translateX(50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes expandWidth {
+            0% { width: 0; }
+            100% { width: 100px; }
         }
 
         /* Main Content */
@@ -1165,6 +1241,7 @@
                 padding-right: 0;
                 max-width: 700px;
                 margin: 0 auto;
+                text-align: center;
             }
             
             .hero-image {
@@ -1722,7 +1799,7 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">VLSI Trends</div>
+            <div class="logo">VLSI TRENDS</div>
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
                     <a href="#home" class="nav-link">
@@ -1766,7 +1843,7 @@
                                     <i class="fas fa-clipboard-check"></i> Sanity Checks
                                 </a>
                         <a href="#prn-flow" class="dropdown-link">
-                            <i class="fas fa-sitemap"></i> PRN Flow
+                            <i class="fas fa-sitemap"></i> PnR Flow
                         </a>
                         <a href="#floor-plan" class="dropdown-link">
                             <i class="fas fa-th-large"></i> Floor Plan
@@ -1829,7 +1906,7 @@
         <div class="hero-bg"></div>
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">VLSI Trends</h1>
+                <h1 class="hero-title">VLSI TRENDS</h1>
                 <h2 class="hero-subtitle">Advanced Semiconductor Design Portfolio</h2>
                 <p class="hero-description">
                     Welcome to the cutting-edge world of VLSI design. This portfolio showcases expertise in ASIC design flow, from concept to silicon. Explore the intricate processes of chip design, synthesis, and physical implementation that power the technology of tomorrow.
@@ -1848,42 +1925,42 @@
         <!-- Grid Section -->
         <div class="grid-section" id="gridSection">
             <div class="grid-item" data-page="physical-design">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/physical-design/600/400.jpg');"></div>
+                <div class="grid-bg" style="background-image: url(https://i.postimg.cc/y8Sq5jbs/Feb-28-2026-04-32-06-PM.png);"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Physical Design</div>
                     <div class="grid-description">The process of transforming a logical netlist into a physical layout that can be manufactured, including placement and routing.</div>
                 </div>
             </div>
             <div class="grid-item" data-page="floor-plan">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/floorplan/600/400.jpg');"></div>
+                <div class="grid-bg" style="background-image: url(https://i.postimg.cc/gkZNb7mD/Chat-GPT-Image-Feb-28-2026-03-55-49-PM.png);"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Floor Plan</div>
                     <div class="grid-description">Creating the physical layout blueprint of the chip, defining block placement and I/O locations.</div>
                 </div>
             </div>
             <div class="grid-item" data-page="power-plan">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/powerplan/600/400.jpg');"></div>
+                <div class="grid-bg" style="background-image: url(https://i.postimg.cc/HLsNmtSr/Chat-GPT-Image-Feb-28-2026-03-56-55-PM.png);"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Power Plan</div>
                     <div class="grid-description">Designing the power distribution network that delivers stable voltage to all parts of the chip.</div>
                 </div>
             </div>
             <div class="grid-item" data-page="placement">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/placement/600/400.jpg');"></div>
+                <div class="grid-bg" style="background-image: url(https://i.postimg.cc/7hg90CBj/Chat-GPT-Image-Feb-28-2026-04-01-20-PM.png);"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Placement</div>
                     <div class="grid-description">Optimally positioning standard cells on the chip to minimize wire length and improve performance.</div>
                 </div>
             </div>
             <div class="grid-item" data-page="cts">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/cts/600/400.jpg');"></div>
+                <div class="grid-bg" style="background-image: url(https://i.postimg.cc/TPzn0dWK/Chat-GPT-Image-Feb-28-2026-04-02-53-PM.png);"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">CTS</div>
                     <div class="grid-description">Clock Tree Synthesis for balanced clock distribution across all sequential elements in the design.</div>
                 </div>
             </div>
             <div class="grid-item" data-page="routing">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/routing/600/400.jpg');"></div>
+                <div class="grid-bg" style="background-image: url(https://i.postimg.cc/2y2qsr3h/Chat-GPT-Image-Feb-28-2026-04-04-15-PM.png);"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Routing</div>
                     <div class="grid-description">Creating the physical connections between placed components following design rules.</div>
@@ -1954,7 +2031,7 @@
                 </a>
             </div>
             <div class="copyright">
-                &copy; 2023 VLSI Trends. All rights reserved.
+                &copy; 2026 VLSI TRENDS. All rights reserved.
             </div>
         </div>
     </footer>
