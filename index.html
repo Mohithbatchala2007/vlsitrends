@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -1055,6 +1056,7 @@
             justify-content: center;
             gap: 20px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .social-link {
@@ -1104,7 +1106,14 @@
             opacity: 0.7;
         }
 
-        /* Mobile Responsive */
+        /* Custom X icon for Twitter */
+        .fa-x-twitter::before {
+            content: "𝕏";
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        /* Mobile menu toggle */
         .mobile-menu-toggle {
             display: none;
             color: var(--neon-blue);
@@ -1112,36 +1121,91 @@
             cursor: pointer;
         }
 
-        @media (max-width: 768px) {
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.6rem;
+            }
+            
+            .grid-section {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 992px) {
             .hero {
-                min-height: 80vh;
                 padding: 60px 0;
+                min-height: 80vh;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
             }
             
             .hero-container {
                 flex-direction: column;
                 text-align: center;
+                gap: 40px;
             }
             
             .hero-content {
                 padding-right: 0;
-                margin-bottom: 30px;
+                max-width: 700px;
+                margin: 0 auto;
             }
             
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-btn-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
             .hero-image {
                 width: 100%;
-                max-width: 400px;
+                max-width: 500px;
+                height: 350px;
+                margin: 0 auto;
             }
+            
+            .grid-section {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .page {
+                padding: 30px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-section {
+                padding: 30px;
+            }
+            
+            .contact-title {
+                font-size: 1.8rem;
+            }
+        }
 
+        @media (max-width: 768px) {
+            /* Navigation */
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
             .nav-menu {
                 position: fixed;
                 left: -100%;
@@ -1149,35 +1213,346 @@
                 flex-direction: column;
                 background-color: rgba(10, 25, 47, 0.98);
                 width: 100%;
-                text-align: center;
+                text-align: left;
                 transition: 0.3s;
                 box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
                 padding: 20px 0;
+                z-index: 999;
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
             }
 
             .nav-menu.active {
                 left: 0;
             }
 
+            .nav-item {
+                width: 100%;
+            }
+
+            .nav-link {
+                display: flex;
+                padding: 15px 20px;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
             .mobile-menu-toggle {
                 display: block;
             }
-
-            .dropdown, .nested-dropdown {
+            
+            /* Dropdown for mobile */
+            .dropdown {
                 position: static;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
                 box-shadow: none;
                 background-color: rgba(0, 123, 255, 0.1);
+                width: 100%;
+                border-radius: 0;
+                border: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
             }
-
+            
+            .dropdown.active {
+                max-height: 500px;
+            }
+            
+            .dropdown-link {
+                padding: 12px 25px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            .nested-dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: rgba(0, 123, 255, 0.15);
+                width: 100%;
+                border-radius: 0;
+                margin-left: 20px;
+            }
+            
+            .dropdown-link i.fas.fa-chevron-right {
+                display: none;
+            }
+            
+            .dropdown-link i.fas.fa-chevron-down {
+                margin-left: auto;
+                transition: transform 0.3s;
+            }
+            
+            .dropdown-link.active i.fas.fa-chevron-down {
+                transform: rotate(180deg);
+            }
+            
+            /* Hero Section */
+            .hero {
+                padding: 50px 0;
+                min-height: 70vh;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .hero-description {
+                font-size: 0.95rem;
+                margin-bottom: 30px;
+            }
+            
+            .hero-btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .hero-btn-secondary {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .hero-image {
+                height: 300px;
+            }
+            
+            /* Grid Section */
             .grid-section {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .grid-item {
+                height: 250px;
+            }
+            
+            .grid-title {
+                font-size: 1.3rem;
+            }
+            
+            .grid-description {
+                font-size: 0.85rem;
+            }
+            
+            /* All Topics Section */
+            .all-topics-title {
+                font-size: 1.7rem;
+            }
+            
+            .all-topics-description {
+                font-size: 1rem;
+            }
+            
+            /* Pages */
+            .page {
+                padding: 25px;
+            }
+            
+            .page-title {
+                font-size: 1.6rem;
+            }
+            
+            .page-content {
+                font-size: 0.95rem;
+            }
+            
+            /* Contact Form */
+            .contact-section {
+                padding: 25px;
+            }
+            
+            .contact-title {
+                font-size: 1.6rem;
             }
             
             .contact-form {
                 grid-template-columns: 1fr;
+            }
+            
+            .form-input, .form-textarea {
+                font-size: 14px;
+            }
+            
+            /* Footer */
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            /* Navigation */
+            .nav-container {
+                padding: 0 10px;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            /* Search */
+            .search-container {
+                padding: 0 10px;
+            }
+            
+            .search-box {
+                font-size: 14px;
+                padding: 12px 45px 12px 15px;
+            }
+            
+            .search-btn {
+                right: 15px;
+                font-size: 16px;
+            }
+            
+            /* Hero Section */
+            .hero {
+                padding: 40px 0;
+                min-height: 60vh;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+            
+            .hero-title::after {
+                width: 80px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-description {
+                font-size: 0.9rem;
+                margin-bottom: 25px;
+            }
+            
+            .hero-btn-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .hero-btn, .hero-btn-secondary {
+                width: 100%;
+                max-width: 250px;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .hero-image {
+                height: 250px;
+                width: 100%;
+            }
+            
+            /* Grid Section */
+            .grid-item {
+                height: 220px;
+            }
+            
+            .grid-title {
+                font-size: 1.2rem;
+            }
+            
+            .grid-description {
+                font-size: 0.8rem;
+            }
+            
+            /* All Topics Section */
+            .all-topics-title {
+                font-size: 1.5rem;
+            }
+            
+            .all-topics-description {
+                font-size: 0.95rem;
+                margin-bottom: 30px;
+            }
+            
+            /* Pages */
+            .page {
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 1.4rem;
+            }
+            
+            .page-content {
+                font-size: 0.9rem;
+            }
+            
+            .page-content ul {
+                margin-left: 15px;
+            }
+            
+            .page-content li {
+                padding-left: 20px;
+                margin-bottom: 8px;
+            }
+            
+            /* Page Navigation */
+            .page-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+            
+            .page-indicator {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            /* Contact Form */
+            .contact-section {
+                padding: 20px;
+            }
+            
+            .contact-title {
+                font-size: 1.4rem;
+            }
+            
+            .form-label {
+                font-size: 0.9rem;
+            }
+            
+            .form-input, .form-textarea {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .form-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            /* Footer */
+            footer {
+                padding: 30px 0;
+            }
+            
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .copyright {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -1359,14 +1734,15 @@
                         <i class="fas fa-user"></i> About
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#synthesis" class="nav-link">
-                        <i class="fas fa-cogs"></i> Synthesis
-                    </a>
-                </li>
+                
                 <li class="nav-item">
                     <a href="#asic-flow" class="nav-link">
                         <i class="fas fa-microchip"></i> ASIC Flow
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#synthesis" class="nav-link">
+                        <i class="fas fa-cogs"></i> Synthesis
                     </a>
                 </li>
                 <li class="nav-item">
@@ -1378,7 +1754,7 @@
                         <div class="dropdown-item">
                             <a href="#input-files" class="dropdown-link">
                                 <i class="fas fa-file-import"></i> Input Files
-                                <i class="fas fa-chevron-right" style="margin-left: auto;"></i>
+                                <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
                             </a>
                             <div class="nested-dropdown">
                                 <a href="#netlist" class="dropdown-link">Netlist</a>
@@ -1386,6 +1762,9 @@
                                 <a href="#constraints" class="dropdown-link">Constraints</a>
                             </div>
                         </div>
+                         <a href="#sanity-checks" class="dropdown-link">
+                                    <i class="fas fa-clipboard-check"></i> Sanity Checks
+                                </a>
                         <a href="#prn-flow" class="dropdown-link">
                             <i class="fas fa-sitemap"></i> PRN Flow
                         </a>
@@ -1468,25 +1847,11 @@
     <div class="container" id="mainContent">
         <!-- Grid Section -->
         <div class="grid-section" id="gridSection">
-            <div class="grid-item" data-page="basics">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/asic-basics/600/400.jpg');"></div>
+            <div class="grid-item" data-page="physical-design">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/physical-design/600/400.jpg');"></div>
                 <div class="grid-overlay">
-                    <div class="grid-title">Basics</div>
-                    <div class="grid-description">Fundamentals of ASIC design, understanding the core concepts and terminologies used in the semiconductor industry.</div>
-                </div>
-            </div>
-            <div class="grid-item" data-page="input-files">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/input-files/600/400.jpg');"></div>
-                <div class="grid-overlay">
-                    <div class="grid-title">Input Files</div>
-                    <div class="grid-description">Essential files required for ASIC design including netlists, libraries, and constraint files.</div>
-                </div>
-            </div>
-            <div class="grid-item" data-page="synthesis">
-                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/synthesis/600/400.jpg');"></div>
-                <div class="grid-overlay">
-                    <div class="grid-title">Synthesis</div>
-                    <div class="grid-description">Process of converting high-level design descriptions into gate-level netlists.</div>
+                    <div class="grid-title">Physical Design</div>
+                    <div class="grid-description">The process of transforming a logical netlist into a physical layout that can be manufactured, including placement and routing.</div>
                 </div>
             </div>
             <div class="grid-item" data-page="floor-plan">
@@ -1496,11 +1861,25 @@
                     <div class="grid-description">Creating the physical layout blueprint of the chip, defining block placement and I/O locations.</div>
                 </div>
             </div>
+            <div class="grid-item" data-page="power-plan">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/powerplan/600/400.jpg');"></div>
+                <div class="grid-overlay">
+                    <div class="grid-title">Power Plan</div>
+                    <div class="grid-description">Designing the power distribution network that delivers stable voltage to all parts of the chip.</div>
+                </div>
+            </div>
             <div class="grid-item" data-page="placement">
                 <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/placement/600/400.jpg');"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Placement</div>
                     <div class="grid-description">Optimally positioning standard cells on the chip to minimize wire length and improve performance.</div>
+                </div>
+            </div>
+            <div class="grid-item" data-page="cts">
+                <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/cts/600/400.jpg');"></div>
+                <div class="grid-overlay">
+                    <div class="grid-title">CTS</div>
+                    <div class="grid-description">Clock Tree Synthesis for balanced clock distribution across all sequential elements in the design.</div>
                 </div>
             </div>
             <div class="grid-item" data-page="routing">
@@ -1648,6 +2027,12 @@
                 id: 'constraints', 
                 title: 'Constraints', 
                 description: 'Design constraints for timing and implementation',
+                type: 'navigation'
+            },
+            { 
+                id: 'sanity-checks', 
+                title: 'Sanity Checks', 
+                description: 'Verification of input files and design consistency before physical design',
                 type: 'navigation'
             },
             { 
@@ -1888,6 +2273,23 @@
                     </ul>
                     <p>SDC (Synopsys Design Constraints) is the industry-standard format for specifying timing constraints. These constraints are used throughout the design flow to guide optimization decisions and verify that the final implementation meets requirements.</p>
                     <p>Proper constraint specification is critical for design success. Overly aggressive constraints may lead to impossible implementation goals, while relaxed constraints may result in suboptimal performance. Iterative refinement of constraints is often necessary to achieve the best balance of design metrics.</p>
+                `
+            },
+            'sanity-checks': {
+                title: 'Sanity Checks',
+                content: `
+                    <p>Sanity checks are critical verification steps performed before proceeding with physical design. These checks validate the correctness and consistency of input files, ensuring that the design is ready for implementation.</p>
+                    <p>Key sanity checks include:</p>
+                    <ul>
+                        <li><strong>Netlist Verification:</strong> Ensuring the synthesized netlist matches the RTL functionality</li>
+                        <li><strong>Library Consistency:</strong> Verifying that all cells in the netlist exist in the target library</li>
+                        <li><strong>Constraint Validation:</strong> Checking that timing constraints are complete and consistent</li>
+                        <li><strong>Port Connectivity:</strong> Ensuring all I/O ports are properly connected and defined</li>
+                        <li><strong>Hierarchy Integrity:</strong> Verifying that design hierarchy is maintained correctly</li>
+                        <li><strong>Clock Domain Analysis:</strong> Identifying and verifying all clock domains in the design</li>
+                    </ul>
+                    <p>Performing thorough sanity checks early in the design flow helps identify issues that could cause significant problems later. These checks save time and resources by catching errors before expensive physical design iterations.</p>
+                    <p>Modern EDA tools provide automated sanity check scripts that can identify common issues. However, experienced designers often perform additional manual checks to ensure design quality.</p>
                 `
             },
             'prn-flow': {
@@ -2147,7 +2549,7 @@
 
         // Current page tracking
         let currentPage = null;
-        const pageOrder = ['home', 'about', 'basics', 'synthesis', 'asic-flow', 'physical-design', 'input-files', 'netlist', 'library', 'constraints', 'prn-flow', 'floor-plan', 'power-plan', 'placement', 'cts', 'routing', 'sign-off', 'parasitic-extraction', 'physical-verification', 'formal-verification', 'static-timing-analysis', 'power-analysis'];
+        const pageOrder = ['home', 'about', 'basics', 'synthesis', 'asic-flow', 'physical-design', 'input-files', 'netlist', 'library', 'constraints', 'sanity-checks', 'prn-flow', 'floor-plan', 'power-plan', 'placement', 'cts', 'routing', 'sign-off', 'parasitic-extraction', 'physical-verification', 'formal-verification', 'static-timing-analysis', 'power-analysis'];
         let currentPageIndex = -1;
 
         // Open page function
@@ -2356,6 +2758,34 @@
             
             // Reset form
             this.reset();
+        });
+
+        // Mobile dropdown toggle functionality
+        document.querySelectorAll('.dropdown-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Only for mobile view
+                if (window.innerWidth <= 768) {
+                    const dropdown = this.nextElementSibling;
+                    const chevron = this.querySelector('.fa-chevron-down');
+                    
+                    if (dropdown && dropdown.classList.contains('nested-dropdown')) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                        
+                        if (chevron) {
+                            chevron.classList.toggle('active');
+                        }
+                    } else if (this.parentElement.querySelector('.dropdown')) {
+                        e.preventDefault();
+                        const parentDropdown = this.parentElement.querySelector('.dropdown');
+                        parentDropdown.classList.toggle('active');
+                        
+                        if (chevron) {
+                            chevron.classList.toggle('active');
+                        }
+                    }
+                }
+            });
         });
 
         // Handle navigation links
