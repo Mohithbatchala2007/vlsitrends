@@ -30,6 +30,81 @@
             overflow-x: hidden;
         }
 
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-navy);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .loader {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .trace-bg {
+            stroke: #333;
+            stroke-width: 1.8;
+            fill: none;
+        }
+
+        .trace-flow {
+            stroke-width: 1.8;
+            fill: none;
+            stroke-dasharray: 40 400;
+            stroke-dashoffset: 438;
+            filter: drop-shadow(0 0 6px currentColor);
+            animation: flow 3s cubic-bezier(0.5, 0, 0.9, 1) infinite;
+        }
+
+        .yellow {
+            stroke: #ffea00;
+            color: #ffea00;
+        }
+        .blue {
+            stroke: #00ccff;
+            color: #00ccff;
+        }
+        .green {
+            stroke: #00ff15;
+            color: #00ff15;
+        }
+        .purple {
+            stroke: #9900ff;
+            color: #9900ff;
+        }
+        .red {
+            stroke: #ff3300;
+            color: #ff3300;
+        }
+
+        @keyframes flow {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
         /* Animated Background */
         .animated-bg {
             position: fixed;
@@ -70,11 +145,272 @@
             100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
         }
 
+        /* Search Bar */
+        .search-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background-color: rgba(10, 25, 47, 0.7);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--tech-blue);
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            color: var(--neon-blue);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 20px;
+            right: 20px;
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+            margin-top: 5px;
+        }
+
+        .search-result-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            color: var(--neon-blue);
+            margin-bottom: 5px;
+        }
+
+        .search-result-description {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .search-highlight {
+            color: var(--neon-blue);
+            font-weight: 600;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 15px 0;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-decoration: none;
+            padding: 20px 15px;
+            transition: var(--transition);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-link::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            color: var(--tech-blue);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--neon-blue);
+        }
+
+        .nav-link:hover i {
+            color: var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            position: relative;
+        }
+
+        .dropdown-link {
+            display: block;
+            color: var(--white);
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .dropdown-link::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--tech-blue), var(--neon-blue));
+            transform: scaleY(0);
+            transition: var(--transition);
+        }
+
+        .dropdown-link:hover::before {
+            transform: scaleY(1);
+        }
+
+        .dropdown-link:hover {
+            background-color: rgba(0, 123, 255, 0.1);
+            color: var(--neon-blue);
+            padding-left: 25px;
+        }
+
+        .dropdown-link i {
+            margin-right: 8px;
+            color: var(--tech-blue);
+            transition: var(--transition);
+        }
+
+        .dropdown-link:hover i {
+            color: var(--neon-blue);
+            transform: translateX(3px);
+        }
+
+        /* Nested Dropdown */
+        .nested-dropdown {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(10px);
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+        }
+
+        .dropdown-item:hover .nested-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
         /* Hero Section */
         .hero {
             display: flex;
             align-items: center;
-            min-height: 100vh;
+            min-height: 90vh;
             padding: 80px 0;
             position: relative;
             overflow: hidden;
@@ -283,176 +619,6 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        /* Navigation Styles */
-        nav {
-            background-color: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 229, 255, 0.2);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .logo {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--neon-blue);
-            font-size: 1.5rem;
-            font-weight: 700;
-            padding: 15px 0;
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            color: var(--white);
-            text-decoration: none;
-            padding: 20px 15px;
-            transition: var(--transition);
-            font-weight: 500;
-            position: relative;
-        }
-
-        .nav-link::before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::before {
-            width: 100%;
-        }
-
-        .nav-link i {
-            margin-right: 8px;
-            color: var(--tech-blue);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover {
-            color: var(--neon-blue);
-        }
-
-        .nav-link:hover i {
-            color: var(--neon-blue);
-            transform: translateY(-2px);
-        }
-
-        /* Dropdown Styles */
-        .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(10px);
-            min-width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 229, 255, 0.1);
-        }
-
-        .nav-item:hover .dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            position: relative;
-        }
-
-        .dropdown-link {
-            display: block;
-            color: var(--white);
-            padding: 12px 20px;
-            text-decoration: none;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .dropdown-link::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--tech-blue), var(--neon-blue));
-            transform: scaleY(0);
-            transition: var(--transition);
-        }
-
-        .dropdown-link:hover::before {
-            transform: scaleY(1);
-        }
-
-        .dropdown-link:hover {
-            background-color: rgba(0, 123, 255, 0.1);
-            color: var(--neon-blue);
-            padding-left: 25px;
-        }
-
-        .dropdown-link i {
-            margin-right: 8px;
-            color: var(--tech-blue);
-            transition: var(--transition);
-        }
-
-        .dropdown-link:hover i {
-            color: var(--neon-blue);
-            transform: translateX(3px);
-        }
-
-        /* Nested Dropdown */
-        .nested-dropdown {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            background-color: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(10px);
-            min-width: 180px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateX(10px);
-            transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 229, 255, 0.1);
-        }
-
-        .dropdown-item:hover .nested-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0);
-        }
-
         /* Main Content */
         .container {
             max-width: 1200px;
@@ -463,7 +629,7 @@
         /* Grid Section */
         .grid-section {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
             margin-bottom: 50px;
         }
@@ -537,21 +703,60 @@
             opacity: 0.9;
         }
 
-        /* Content Sections */
-        .content-section {
+        /* All Topics Section */
+        .all-topics-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .all-topics-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .all-topics-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.8;
+        }
+
+        /* Pages Container */
+        .pages-container {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .pages-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page {
             background-color: rgba(10, 25, 47, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 10px;
             padding: 40px;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: none;
             border: 1px solid rgba(0, 229, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .content-section::before {
+        .page::before {
             content: "";
             position: absolute;
             top: 0;
@@ -562,65 +767,72 @@
             z-index: -1;
         }
 
-        .content-section.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+            padding-bottom: 15px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
+        .page-title {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 700;
             font-size: 2rem;
-            margin-bottom: 20px;
             background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(0, 229, 255, 0.3);
-            position: relative;
         }
 
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--neon-blue);
+        .page-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 123, 255, 0.1);
         }
 
-        .section-content {
+        .page-close:hover {
+            color: var(--neon-blue);
+            background-color: rgba(0, 123, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .page-content {
             line-height: 1.8;
         }
 
-        .section-content p {
+        .page-content p {
             margin-bottom: 20px;
         }
 
-        .section-content ul {
+        .page-content ul {
             margin-left: 20px;
             margin-bottom: 20px;
         }
 
-        .section-content li {
+        .page-content li {
             margin-bottom: 10px;
             position: relative;
             padding-left: 25px;
             transition: var(--transition);
         }
 
-        .section-content li:hover {
+        .page-content li:hover {
             transform: translateX(5px);
         }
 
-        .section-content li::before {
+        .page-content li::before {
             content: "";
             position: absolute;
             left: 0;
@@ -636,7 +848,9 @@
         .page-nav {
             display: flex;
             justify-content: center;
+            align-items: center;
             margin: 40px 0;
+            gap: 20px;
         }
 
         .page-btn {
@@ -644,7 +858,6 @@
             color: white;
             border: none;
             padding: 10px 20px;
-            margin: 0 10px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
@@ -679,6 +892,144 @@
 
         .page-btn:hover {
             transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            color: var(--neon-blue);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            background-color: rgba(0, 123, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background-color: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(0, 123, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .contact-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .contact-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--neon-blue);
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(10, 25, 47, 0.5);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-btn {
+            background: linear-gradient(90deg, var(--tech-blue), var(--neon-blue));
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+        }
+
+        .form-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+            z-index: -1;
+        }
+
+        .form-btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .form-btn:hover {
+            transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4);
         }
 
@@ -720,6 +1071,7 @@
             border: 1px solid rgba(0, 229, 255, 0.2);
             position: relative;
             overflow: hidden;
+            text-decoration: none;
         }
 
         .social-link::before {
@@ -744,6 +1096,7 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3);
             border-color: transparent;
+            text-decoration: none;
         }
 
         .copyright {
@@ -822,10 +1175,172 @@
             .grid-section {
                 grid-template-columns: 1fr;
             }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="main-container">
+            <div class="loader">
+                <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="chipGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#2d2d2d"></stop>
+                            <stop offset="100%" stop-color="#0f0f0f"></stop>
+                        </linearGradient>
+
+                        <linearGradient id="textGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#eeeeee"></stop>
+                            <stop offset="100%" stop-color="#888888"></stop>
+                        </linearGradient>
+
+                        <linearGradient id="pinGradient" x1="1" y1="0" x2="0" y2="0">
+                            <stop offset="0%" stop-color="#bbbbbb"></stop>
+                            <stop offset="50%" stop-color="#888888"></stop>
+                            <stop offset="100%" stop-color="#555555"></stop>
+                        </linearGradient>
+                    </defs>
+
+                    <g id="traces">
+                        <path d="M100 100 H200 V210 H326" class="trace-bg"></path>
+                        <path d="M100 100 H200 V210 H326" class="trace-flow purple"></path>
+
+                        <path d="M80 180 H180 V230 H326" class="trace-bg"></path>
+                        <path d="M80 180 H180 V230 H326" class="trace-flow blue"></path>
+
+                        <path d="M60 260 H150 V250 H326" class="trace-bg"></path>
+                        <path d="M60 260 H150 V250 H326" class="trace-flow yellow"></path>
+
+                        <path d="M100 350 H200 V270 H326" class="trace-bg"></path>
+                        <path d="M100 350 H200 V270 H326" class="trace-flow green"></path>
+
+                        <path d="M700 90 H560 V210 H474" class="trace-bg"></path>
+                        <path d="M700 90 H560 V210 H474" class="trace-flow blue"></path>
+
+                        <path d="M740 160 H580 V230 H474" class="trace-bg"></path>
+                        <path d="M740 160 H580 V230 H474" class="trace-flow green"></path>
+
+                        <path d="M720 250 H590 V250 H474" class="trace-bg"></path>
+                        <path d="M720 250 H590 V250 H474" class="trace-flow red"></path>
+
+                        <path d="M680 340 H570 V270 H474" class="trace-bg"></path>
+                        <path d="M680 340 H570 V270 H474" class="trace-flow yellow"></path>
+                    </g>
+
+                    <rect
+                        x="330"
+                        y="190"
+                        width="140"
+                        height="100"
+                        rx="20"
+                        ry="20"
+                        fill="url(#chipGradient)"
+                        stroke="#222"
+                        stroke-width="3"
+                        filter="drop-shadow(0 0 6px rgba(0,0,0,0.8))"
+                    ></rect>
+
+                    <g>
+                        <rect
+                            x="322"
+                            y="205"
+                            width="8"
+                            height="10"
+                            fill="url(#pinGradient)"
+                            rx="2"
+                        ></rect>
+                        <rect
+                            x="322"
+                            y="225"
+                            width="8"
+                            height="10"
+                            fill="url(#pinGradient)"
+                            rx="2"
+                        ></rect>
+                        <rect
+                            x="322"
+                            y="245"
+                            width="8"
+                            height="10"
+                            fill="url(#pinGradient)"
+                            rx="2"
+                        ></rect>
+                        <rect
+                            x="322"
+                            y="265"
+                            width="8"
+                            height="10"
+                            fill="url(#pinGradient)"
+                            rx="2"
+                        ></rect>
+                    </g>
+
+                    <g>
+                        <rect
+                            x="470"
+                            y="205"
+                            width="8"
+                            height="10"
+                            fill="url(#pinGradient)"
+                            rx="2"
+                        ></rect>
+                        <rect
+                            x="470"
+                            y="225"
+                            width="8"
+                            height="10"
+                            fill="url(#pinGradient)"
+                            rx="2"
+                        ></rect>
+                        <rect
+                            x="470"
+                            y="245"
+                            width="8"
+                            height="10"
+                            fill="url(#pinGradient)"
+                            rx="2"
+                        ></rect>
+                        <rect
+                            x="470"
+                            y="265"
+                            width="8"
+                            height="10"
+                            fill="url(#pinGradient)"
+                            rx="2"
+                        ></rect>
+                    </g>
+
+                    <text
+                        x="400"
+                        y="240"
+                        font-family="Arial, sans-serif"
+                        font-size="22"
+                        fill="url(#textGradient)"
+                        text-anchor="middle"
+                        alignment-baseline="middle"
+                    >
+                        Loading
+                    </text>
+
+                    <circle cx="100" cy="100" r="5" fill="black"></circle>
+                    <circle cx="80" cy="180" r="5" fill="black"></circle>
+                    <circle cx="60" cy="260" r="5" fill="black"></circle>
+                    <circle cx="100" cy="350" r="5" fill="black"></circle>
+
+                    <circle cx="700" cy="90" r="5" fill="black"></circle>
+                    <circle cx="740" cy="160" r="5" fill="black"></circle>
+                    <circle cx="720" cy="250" r="5" fill="black"></circle>
+                    <circle cx="680" cy="340" r="5" fill="black"></circle>
+                </svg>
+            </div>
+        </div>
+    </div>
+
     <!-- Animated Background -->
     <div class="animated-bg" id="animatedBg"></div>
 
@@ -921,8 +1436,17 @@
         </div>
     </nav>
 
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchBox" placeholder="Search for topics, concepts, or sections...">
+        <button class="search-btn" id="searchBtn">
+            <i class="fas fa-search"></i>
+        </button>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="heroSection">
         <div class="hero-bg"></div>
         <div class="hero-container">
             <div class="hero-content">
@@ -932,8 +1456,8 @@
                     Welcome to the cutting-edge world of VLSI design. This portfolio showcases expertise in ASIC design flow, from concept to silicon. Explore the intricate processes of chip design, synthesis, and physical implementation that power the technology of tomorrow.
                 </p>
                 <div class="hero-btn-container">
-                    <a href="#basics" class="hero-btn">Explore My Work</a>
-                    <a href="#about" class="hero-btn-secondary">Learn More</a>
+                    <a href="#" class="hero-btn" id="exploreBtn">Explore My Work</a>
+                    <a href="#" class="hero-btn-secondary" id="learnMoreBtn">Learn More</a>
                 </div>
             </div>
             <div class="hero-image"></div>
@@ -941,45 +1465,45 @@
     </section>
 
     <!-- Main Content -->
-    <div class="container">
+    <div class="container" id="mainContent">
         <!-- Grid Section -->
-        <div class="grid-section">
-            <div class="grid-item" onclick="navigateToSection('basics')">
+        <div class="grid-section" id="gridSection">
+            <div class="grid-item" data-page="basics">
                 <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/asic-basics/600/400.jpg');"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Basics</div>
                     <div class="grid-description">Fundamentals of ASIC design, understanding the core concepts and terminologies used in the semiconductor industry.</div>
                 </div>
             </div>
-            <div class="grid-item" onclick="navigateToSection('input-files')">
+            <div class="grid-item" data-page="input-files">
                 <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/input-files/600/400.jpg');"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Input Files</div>
                     <div class="grid-description">Essential files required for ASIC design including netlists, libraries, and constraint files.</div>
                 </div>
             </div>
-            <div class="grid-item" onclick="navigateToSection('synthesis')">
+            <div class="grid-item" data-page="synthesis">
                 <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/synthesis/600/400.jpg');"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Synthesis</div>
                     <div class="grid-description">Process of converting high-level design descriptions into gate-level netlists.</div>
                 </div>
             </div>
-            <div class="grid-item" onclick="navigateToSection('floor-plan')">
+            <div class="grid-item" data-page="floor-plan">
                 <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/floorplan/600/400.jpg');"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Floor Plan</div>
                     <div class="grid-description">Creating the physical layout blueprint of the chip, defining block placement and I/O locations.</div>
                 </div>
             </div>
-            <div class="grid-item" onclick="navigateToSection('placement')">
+            <div class="grid-item" data-page="placement">
                 <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/placement/600/400.jpg');"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Placement</div>
                     <div class="grid-description">Optimally positioning standard cells on the chip to minimize wire length and improve performance.</div>
                 </div>
             </div>
-            <div class="grid-item" onclick="navigateToSection('routing')">
+            <div class="grid-item" data-page="routing">
                 <div class="grid-bg" style="background-image: url('https://picsum.photos/seed/routing/600/400.jpg');"></div>
                 <div class="grid-overlay">
                     <div class="grid-title">Routing</div>
@@ -988,110 +1512,42 @@
             </div>
         </div>
 
-        <!-- Content Sections -->
-        <div id="basics" class="content-section">
-            <h2 class="section-title">ASIC Design Basics</h2>
-            <div class="section-content">
-                <p>ASIC (Application-Specific Integrated Circuit) design is a specialized field of semiconductor engineering that focuses on creating integrated circuits tailored for specific applications. Unlike general-purpose processors, ASICs are optimized for particular functions, offering superior performance, power efficiency, and smaller form factors.</p>
-                <p>The ASIC design flow encompasses multiple stages, from specification to final tape-out. Each stage requires specialized tools and expertise to ensure the final chip meets performance, power, and area (PPA) targets while adhering to manufacturing constraints.</p>
-                <p>Key concepts in ASIC design include:</p>
-                <ul>
-                    <li>Design specification and architecture definition</li>
-                    <li>RTL (Register Transfer Level) design and verification</li>
-                    <li>Logic synthesis and optimization</li>
-                    <li>Physical implementation (placement, routing, etc.)</li>
-                    <li>Timing closure and sign-off verification</li>
-                </ul>
-            </div>
+        <!-- All Topics Section -->
+        <div class="all-topics-section">
+            <h2 class="all-topics-title">Explore All Topics</h2>
+            <p class="all-topics-description">
+                Discover comprehensive coverage of VLSI design from basics to advanced topics. Navigate through all 21 topics using the page navigation arrows to explore the complete ASIC design flow.
+            </p>
+            <a href="#" class="hero-btn" id="browseAllBtn">Browse All Topics</a>
         </div>
 
-        <div id="input-files" class="content-section">
-            <h2 class="section-title">Input Files</h2>
-            <div class="section-content">
-                <p>Input files are the foundation of the ASIC design process, providing all necessary information for synthesis and physical design tools. These files define the functionality, constraints, and manufacturing requirements of the chip.</p>
-                <p>Essential input files include:</p>
-                <ul>
-                    <li><strong>RTL Files:</strong> Hardware description language files (Verilog, VHDL) that describe the chip's functionality</li>
-                    <li><strong>Library Files:</strong> Standard cell libraries containing timing, power, and physical information</li>
-                    <li><strong>Constraint Files:</strong> SDC (Synopsys Design Constraints) files specifying timing, clock, and I/O constraints</li>
-                    <li><strong>Technology Files:</strong> Process technology files defining design rules and layer information</li>
-                    <li><strong>Configuration Files:</strong> Tool-specific configuration files for synthesis and place-and-route tools</li>
-                </ul>
-            </div>
+        <!-- Pages Container -->
+        <div class="pages-container" id="pagesContainer">
+            <!-- Page content will be dynamically inserted here -->
         </div>
 
-        <div id="synthesis" class="content-section">
-            <h2 class="section-title">Synthesis</h2>
-            <div class="section-content">
-                <p>Synthesis is the process of converting high-level RTL descriptions into gate-level netlists optimized for the target technology. This critical step transforms functional specifications into physical implementations while meeting timing, area, and power constraints.</p>
-                <p>The synthesis process involves:</p>
-                <ul>
-                    <li>Translation of RTL to generic technology-independent gates</li>
-                    <li>Logic optimization to minimize area and improve performance</li>
-                    <li>Technology mapping to target-specific standard cells</li>
-                    <li>Timing analysis and optimization to meet clock constraints</li>
-                    <li>Generation of gate-level netlist and reports</li>
-                </ul>
-                <p>Modern synthesis tools use advanced algorithms to explore the design space and find optimal implementations that balance competing requirements of performance, power, and area.</p>
+        <!-- Contact Section -->
+        <div class="contact-section" id="contactSection">
+            <div class="contact-header">
+                <h2 class="contact-title">Get In Touch</h2>
             </div>
-        </div>
-
-        <div id="floor-plan" class="content-section">
-            <h2 class="section-title">Floor Plan</h2>
-            <div class="section-content">
-                <p>Floor planning is a critical early step in physical design that defines the chip's overall layout structure. It involves determining the placement of major blocks, I/O pads, and power distribution networks to optimize performance and manufacturability.</p>
-                <p>Key aspects of floor planning include:</p>
-                <ul>
-                    <li>Die size and aspect ratio determination</li>
-                    <li>Macro block placement and orientation</li>
-                    <li>I/O pad placement and assignment</li>
-                    <li>Power grid design and placement</li>
-                    <li>Channel and routing region allocation</li>
-                </ul>
-                <p>A well-executed floor plan forms the foundation for successful placement and routing, directly impacting the chip's performance, power consumption, and yield.</p>
-            </div>
-        </div>
-
-        <div id="placement" class="content-section">
-            <h2 class="section-title">Placement</h2>
-            <div class="section-content">
-                <p>Placement is the process of positioning standard cells and macros within the floor plan to optimize timing, power, and area. This complex optimization problem requires balancing multiple competing objectives while adhering to design rules.</p>
-                <p>The placement process typically follows these steps:</p>
-                <ul>
-                    <li>Initial placement using analytical or force-directed methods</li>
-                    <li>Legalization to ensure all cells are placed on valid grid locations</li>
-                    <li>Timing-driven optimization to improve critical paths</li>
-                    <li>Congestion analysis and mitigation</li>
-                    <li>Power network optimization</li>
-                </ul>
-                <p>Modern placement tools use sophisticated algorithms including machine learning techniques to achieve near-optimal solutions for complex designs with millions of cells.</p>
-            </div>
-        </div>
-
-        <div id="routing" class="content-section">
-            <h2 class="section-title">Routing</h2>
-            <div class="section-content">
-                <p>Routing creates the physical connections between placed components, implementing the logical netlist in the physical domain. This multi-stage process must satisfy design rules while optimizing timing, signal integrity, and manufacturability.</p>
-                <p>The routing flow typically includes:</p>
-                <ul>
-                    <li>Global routing to determine approximate paths and estimate congestion</li>
-                    <li>Detailed routing to create actual metal connections following design rules</li>
-                    <li>Timing optimization through wire sizing and buffer insertion</li>
-                    <li>Signal integrity analysis and fixes</li>
-                    <li>Design rule checking and correction</li>
-                </ul>
-                <p>Advanced routing tools use multi-threading and specialized algorithms to handle the complexity of modern designs with multiple metal layers and stringent requirements.</p>
-            </div>
-        </div>
-
-        <!-- Page Navigation -->
-        <div class="page-nav">
-            <button class="page-btn" id="prevBtn" onclick="navigatePage(-1)">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="page-btn" id="nextBtn" onclick="navigatePage(1)">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label class="form-label" for="name">Name</label>
+                    <input type="text" id="name" class="form-input" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="Your Email" required>
+                </div>
+                <div class="form-group full-width">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea id="message" class="form-textarea" placeholder="Your Message" required></textarea>
+                </div>
+                <div class="form-group full-width">
+                    <button type="submit" class="form-btn">Send Message</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -1114,7 +1570,7 @@
                 <a href="https://youtube.com/@vlsitrends" class="social-link" target="_blank">
                     <i class="fab fa-youtube"></i>
                 </a>
-                <a href="https://wa.me/1234567890" class="social-link" target="_blank">
+                <a href="https://wa.me/917732002127" class="social-link" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
@@ -1125,6 +1581,538 @@
     </footer>
 
     <script>
+        // Preloader functionality
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const preloader = document.getElementById('preloader');
+                preloader.classList.add('fade-out');
+                
+                // Remove preloader from DOM after fade out animation completes
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1500); // Show preloader for 1.5 seconds
+        });
+
+        // Search data including all navigation items and dropdowns
+        const searchData = [
+            { 
+                id: 'home', 
+                title: 'Home', 
+                description: 'Main landing page of the website',
+                type: 'navigation'
+            },
+            { 
+                id: 'about', 
+                title: 'About', 
+                description: 'Information about VLSI Trends and expertise',
+                type: 'navigation'
+            },
+            { 
+                id: 'synthesis', 
+                title: 'Synthesis', 
+                description: 'Process of converting high-level design descriptions into gate-level netlists',
+                type: 'navigation'
+            },
+            { 
+                id: 'asic-flow', 
+                title: 'ASIC Flow', 
+                description: 'Complete ASIC design flow from concept to silicon',
+                type: 'navigation'
+            },
+            { 
+                id: 'physical-design', 
+                title: 'Physical Design', 
+                description: 'Physical implementation of ASIC designs',
+                type: 'navigation'
+            },
+            { 
+                id: 'input-files', 
+                title: 'Input Files', 
+                description: 'Essential files required for ASIC design including netlists, libraries, and constraint files',
+                type: 'navigation'
+            },
+            { 
+                id: 'netlist', 
+                title: 'Netlist', 
+                description: 'Circuit description in terms of gates and connections',
+                type: 'navigation'
+            },
+            { 
+                id: 'library', 
+                title: 'Library', 
+                description: 'Standard cell libraries containing timing and physical information',
+                type: 'navigation'
+            },
+            { 
+                id: 'constraints', 
+                title: 'Constraints', 
+                description: 'Design constraints for timing and implementation',
+                type: 'navigation'
+            },
+            { 
+                id: 'prn-flow', 
+                title: 'PRN Flow', 
+                description: 'Place and Route flow for ASIC designs',
+                type: 'navigation'
+            },
+            { 
+                id: 'floor-plan', 
+                title: 'Floor Plan', 
+                description: 'Creating the physical layout blueprint of the chip',
+                type: 'navigation'
+            },
+            { 
+                id: 'power-plan', 
+                title: 'Power Plan', 
+                description: 'Power distribution network design',
+                type: 'navigation'
+            },
+            { 
+                id: 'placement', 
+                title: 'Placement', 
+                description: 'Optimally positioning standard cells on the chip',
+                type: 'navigation'
+            },
+            { 
+                id: 'cts', 
+                title: 'CTS', 
+                description: 'Clock Tree Synthesis for balanced clock distribution',
+                type: 'navigation'
+            },
+            { 
+                id: 'routing', 
+                title: 'Routing', 
+                description: 'Creating physical connections between placed components',
+                type: 'navigation'
+            },
+            { 
+                id: 'sign-off', 
+                title: 'Sign Off', 
+                description: 'Final verification steps before tape-out',
+                type: 'navigation'
+            },
+            { 
+                id: 'parasitic-extraction', 
+                title: 'Parasitic Extraction', 
+                description: 'Extracting parasitic elements from the physical design',
+                type: 'navigation'
+            },
+            { 
+                id: 'physical-verification', 
+                title: 'Physical Verification', 
+                description: 'Verifying the physical design against rules',
+                type: 'navigation'
+            },
+            { 
+                id: 'formal-verification', 
+                title: 'Formal Verification', 
+                description: 'Mathematical verification of design correctness',
+                type: 'navigation'
+            },
+            { 
+                id: 'static-timing-analysis', 
+                title: 'Static Timing Analysis', 
+                description: 'Analyzing timing without simulation',
+                type: 'navigation'
+            },
+            { 
+                id: 'power-analysis', 
+                title: 'Power Analysis', 
+                description: 'Analyzing power consumption and voltage drops',
+                type: 'navigation'
+            }
+        ];
+
+        // Comprehensive page content for all topics
+        const pageContent = {
+            'home': {
+                title: 'Home',
+                content: `
+                    <p>Welcome to VLSI Trends, your comprehensive resource for semiconductor design expertise. This platform showcases advanced knowledge in ASIC design flow, from concept to silicon implementation.</p>
+                    <p>Our portfolio covers the entire VLSI design process, including synthesis, physical design, and sign-off verification. Each stage of the design flow is carefully documented with detailed explanations, best practices, and industry insights.</p>
+                    <p>Explore our topics to learn about:</p>
+                    <ul>
+                        <li>ASIC design fundamentals and methodologies</li>
+                        <li>Advanced synthesis techniques and optimization</li>
+                        <li>Physical design implementation strategies</li>
+                        <li>Comprehensive verification and sign-off processes</li>
+                    </ul>
+                    <p>Whether you're a student learning VLSI design or a professional looking to enhance your skills, VLSI Trends provides the knowledge and insights you need to excel in semiconductor design.</p>
+                `
+            },
+            'about': {
+                title: 'About VLSI Trends',
+                content: `
+                    <p>VLSI Trends is a specialized platform dedicated to sharing expertise in Application-Specific Integrated Circuit (ASIC) design and semiconductor technology. Our mission is to provide comprehensive resources for engineers, students, and professionals interested in VLSI design.</p>
+                    <p>With years of experience in semiconductor design, our team has worked on cutting-edge projects spanning various technology nodes and application domains. This expertise is distilled into accessible content that covers both theoretical foundations and practical implementation details.</p>
+                    <p>Our areas of specialization include:</p>
+                    <ul>
+                        <li>RTL design and verification</li>
+                        <li>Logic synthesis and optimization</li>
+                        <li>Physical design implementation</li>
+                        <li>Timing closure and sign-off verification</li>
+                        <li>Low-power design techniques</li>
+                    </ul>
+                    <p>Through VLSI Trends, we aim to bridge the gap between academic knowledge and industry practice, providing insights that are valuable for both learning and professional application.</p>
+                `
+            },
+            'basics': {
+                title: 'ASIC Design Basics',
+                content: `
+                    <p>ASIC (Application-Specific Integrated Circuit) design is a specialized field of semiconductor engineering that focuses on creating integrated circuits tailored for specific applications. Unlike general-purpose processors, ASICs are optimized for particular functions, offering superior performance, power efficiency, and smaller form factors.</p>
+                    <p>The ASIC design flow encompasses multiple stages, from specification to final tape-out. Each stage requires specialized tools and expertise to ensure the final chip meets performance, power, and area (PPA) targets while adhering to manufacturing constraints.</p>
+                    <p>Key concepts in ASIC design include:</p>
+                    <ul>
+                        <li>Design specification and architecture definition</li>
+                        <li>RTL (Register Transfer Level) design and verification</li>
+                        <li>Logic synthesis and optimization</li>
+                        <li>Physical implementation (placement, routing, etc.)</li>
+                        <li>Timing closure and sign-off verification</li>
+                    </ul>
+                    <p>Modern ASIC design leverages advanced EDA (Electronic Design Automation) tools that automate many aspects of the design process. However, a deep understanding of the underlying principles is essential for effective design optimization and troubleshooting.</p>
+                `
+            },
+            'synthesis': {
+                title: 'Synthesis',
+                content: `
+                    <p>Synthesis is the process of converting high-level RTL descriptions into gate-level netlists optimized for the target technology. This critical step transforms functional specifications into physical implementations while meeting timing, area, and power constraints.</p>
+                    <p>The synthesis process involves:</p>
+                    <ul>
+                        <li>Translation of RTL to generic technology-independent gates</li>
+                        <li>Logic optimization to minimize area and improve performance</li>
+                        <li>Technology mapping to target-specific standard cells</li>
+                        <li>Timing analysis and optimization to meet clock constraints</li>
+                        <li>Generation of gate-level netlist and reports</li>
+                    </ul>
+                    <p>Modern synthesis tools use advanced algorithms to explore the design space and find optimal implementations that balance competing requirements of performance, power, and area. The synthesis process is iterative, with designers often modifying RTL or constraints to achieve desired results.</p>
+                    <p>Key synthesis metrics include gate count, timing slack, power consumption, and area utilization. These metrics guide optimization decisions throughout the synthesis process.</p>
+                `
+            },
+            'asic-flow': {
+                title: 'ASIC Flow',
+                content: `
+                    <p>The ASIC (Application-Specific Integrated Circuit) design flow encompasses the complete process from initial specification to final tape-out. This systematic approach ensures that the final chip meets all requirements while adhering to manufacturing constraints.</p>
+                    <p>The typical ASIC flow includes these major stages:</p>
+                    <ul>
+                        <li>Specification and architecture definition</li>
+                        <li>RTL design and functional verification</li>
+                        <li>Logic synthesis and optimization</li>
+                        <li>Physical design (floor planning, placement, routing)</li>
+                        <li>Sign-off verification and analysis</li>
+                        <li>Tape-out and manufacturing handoff</li>
+                    </ul>
+                    <p>Each stage requires specialized tools and expertise, with multiple iterations often needed to achieve optimal results. Modern ASIC flows leverage advanced EDA tools that automate many aspects of the design process while providing designers with control over critical decisions.</p>
+                    <p>Understanding the complete ASIC flow is essential for successful semiconductor design, as decisions made in early stages significantly impact later stages and overall chip performance.</p>
+                `
+            },
+            'physical-design': {
+                title: 'Physical Design',
+                content: `
+                    <p>Physical design is the process of transforming a logical netlist into a physical layout that can be manufactured. This critical phase involves determining the physical placement of components and routing connections between them while meeting design constraints.</p>
+                    <p>Key aspects of physical design include:</p>
+                    <ul>
+                        <li>Floor planning to define the chip's overall structure</li>
+                        <li>Power planning to ensure adequate power distribution</li>
+                        <li>Placement of standard cells and macros</li>
+                        <li>Clock Tree Synthesis (CTS) for balanced clock distribution</li>
+                        <li>Routing to create physical connections</li>
+                        <li>Timing closure to meet performance requirements</li>
+                    </ul>
+                    <p>Physical design is an iterative process that requires balancing multiple competing objectives, including timing, area, power, and signal integrity. Modern physical design tools use sophisticated algorithms to optimize these parameters while adhering to manufacturing design rules.</p>
+                    <p>The quality of physical design directly impacts chip performance, power consumption, and manufacturing yield, making it a critical phase in the ASIC design flow.</p>
+                `
+            },
+            'input-files': {
+                title: 'Input Files',
+                content: `
+                    <p>Input files are the foundation of the ASIC design process, providing all necessary information for synthesis and physical design tools. These files define the functionality, constraints, and manufacturing requirements of the chip.</p>
+                    <p>Essential input files include:</p>
+                    <ul>
+                        <li><strong>RTL Files:</strong> Hardware description language files (Verilog, VHDL) that describe the chip's functionality</li>
+                        <li><strong>Library Files:</strong> Standard cell libraries containing timing, power, and physical information</li>
+                        <li><strong>Constraint Files:</strong> SDC (Synopsys Design Constraints) files specifying timing, clock, and I/O constraints</li>
+                        <li><strong>Technology Files:</strong> Process technology files defining design rules and layer information</li>
+                        <li><strong>Configuration Files:</strong> Tool-specific configuration files for synthesis and place-and-route tools</li>
+                    </ul>
+                    <p>The quality and accuracy of input files directly impact the success of the design process. Incomplete or incorrect input files can lead to suboptimal results or design failures that may only be discovered late in the flow, resulting in costly rework.</p>
+                `
+            },
+            'netlist': {
+                title: 'Netlist',
+                content: `
+                    <p>A netlist is a fundamental representation of an electronic circuit that describes the connections between components. In VLSI design, netlists serve as the bridge between high-level design descriptions and physical implementation.</p>
+                    <p>Types of netlists in the ASIC design flow include:</p>
+                    <ul>
+                        <li><strong>RTL Netlist:</strong> High-level representation before synthesis</li>
+                        <li><strong>Generic Netlist:</strong> Technology-independent gate-level representation</li>
+                        <li><strong>Mapped Netlist:</strong> Technology-specific gate-level representation</li>
+                        <li><strong>Physical Netlist:</strong> Post-layout representation with parasitic information</li>
+                    </ul>
+                    <p>Netlists can be represented in various formats, including EDIF, Verilog, and DEF (Design Exchange Format). Each format serves different purposes in the design flow, with some optimized for simulation and others for physical implementation.</p>
+                    <p>The accuracy and completeness of netlist information are critical for successful synthesis and physical design. Errors in netlist connectivity can lead to functional failures that may only be discovered late in the design process.</p>
+                `
+            },
+            'library': {
+                title: 'Library',
+                content: `
+                    <p>Standard cell libraries are collections of pre-designed logic functions that form the building blocks of digital integrated circuits. These libraries provide the essential components needed to implement complex designs while ensuring compatibility with the target manufacturing process.</p>
+                    <p>Key components of standard cell libraries include:</p>
+                    <ul>
+                        <li><strong>Logic Gates:</strong> AND, OR, NOT, NAND, NOR, XOR, XNOR gates</li>
+                        <li><strong>Sequential Elements:</strong> Flip-flops, latches, and registers</li>
+                        <li><strong>Special Functions:</strong> Multiplexers, decoders, adders, etc.</li>
+                        <li><strong>I/O Cells:</strong> Input, output, and bidirectional buffers</li>
+                    </ul>
+                    <p>Library files contain critical information for each cell, including:</p>
+                    <ul>
+                        <li>Timing characteristics (propagation delay, setup/hold times)</li>
+                        <li>Power consumption (static and dynamic)</li>
+                        <li>Physical dimensions and pin locations</li>
+                        <li>Electrical characteristics (drive strength, input capacitance)</li>
+                    </ul>
+                    <p>Selecting the appropriate library is crucial for achieving design goals, as different libraries offer trade-offs between performance, power, and area. Library characterization ensures accurate modeling of cell behavior across different operating conditions.</p>
+                `
+            },
+            'constraints': {
+                title: 'Constraints',
+                content: `
+                    <p>Design constraints are essential parameters that guide the synthesis and physical design processes, ensuring that the final implementation meets specific requirements. These constraints define timing, power, and area targets that the design must achieve.</p>
+                    <p>Types of design constraints include:</p>
+                    <ul>
+                        <li><strong>Timing Constraints:</strong> Clock definitions, period requirements, and timing exceptions</li>
+                        <li><strong>I/O Constraints:</strong> Input/output timing requirements and voltage levels</li>
+                        <li><strong>Power Constraints:</strong> Power budget targets and voltage domains</li>
+                        <li><strong>Physical Constraints:</strong> Placement restrictions and area requirements</li>
+                        <li><strong>Design Rule Constraints:</strong> Manufacturing and reliability requirements</li>
+                    </ul>
+                    <p>SDC (Synopsys Design Constraints) is the industry-standard format for specifying timing constraints. These constraints are used throughout the design flow to guide optimization decisions and verify that the final implementation meets requirements.</p>
+                    <p>Proper constraint specification is critical for design success. Overly aggressive constraints may lead to impossible implementation goals, while relaxed constraints may result in suboptimal performance. Iterative refinement of constraints is often necessary to achieve the best balance of design metrics.</p>
+                `
+            },
+            'prn-flow': {
+                title: 'PRN Flow',
+                content: `
+                    <p>PRN (Place and Route) flow is the core of physical design implementation, encompassing the processes of placing standard cells and routing connections between them. This critical phase transforms a logical netlist into a physical layout that can be manufactured.</p>
+                    <p>The PRN flow consists of several key stages:</p>
+                    <ul>
+                        <li><strong>Pre-placement Planning:</strong> Creating initial floorplan and power network</li>
+                        <li><strong>Placement:</strong> Positioning standard cells to optimize timing and congestion</li>
+                        <li><strong>Clock Tree Synthesis (CTS):</strong> Building balanced clock distribution network</li>
+                        <li><strong>Routing:</strong> Creating physical connections following design rules</li>
+                        <li><strong>Post-route Optimization:</strong> Fixing violations and improving timing</li>
+                    </ul>
+                    <p>Modern PRN flows use sophisticated algorithms to optimize multiple competing objectives simultaneously. Machine learning techniques are increasingly being incorporated to improve results and reduce runtime.</p>
+                    <p>The PRN flow is often iterative, with multiple rounds of optimization needed to achieve timing closure. Designers may need to adjust constraints or make manual edits to address specific issues that automated tools cannot resolve.</p>
+                `
+            },
+            'floor-plan': {
+                title: 'Floor Plan',
+                content: `
+                    <p>Floor planning is a critical early step in physical design that defines the chip's overall layout structure. It involves determining the placement of major blocks, I/O pads, and power distribution networks to optimize performance and manufacturability.</p>
+                    <p>Key aspects of floor planning include:</p>
+                    <ul>
+                        <li>Die size and aspect ratio determination</li>
+                        <li>Macro block placement and orientation</li>
+                        <li>I/O pad placement and assignment</li>
+                        <li>Power grid design and placement</li>
+                        <li>Channel and routing region allocation</li>
+                    </ul>
+                    <p>A well-executed floor plan forms the foundation for successful placement and routing, directly impacting the chip's performance, power consumption, and yield. Floor planning requires balancing multiple competing objectives, including timing, area, power, and signal integrity.</p>
+                    <p>Advanced floor planning tools use automated algorithms to suggest optimal block placements, but experienced designers often make manual adjustments to address specific design requirements or constraints. The quality of the floor plan significantly affects the ease and success of subsequent placement and routing stages.</p>
+                `
+            },
+            'power-plan': {
+                title: 'Power Plan',
+                content: `
+                    <p>Power planning is the process of designing the power distribution network that delivers stable voltage to all parts of the chip. A robust power plan is essential for ensuring reliable operation and meeting performance targets.</p>
+                    <p>Key aspects of power planning include:</p>
+                    <ul>
+                        <li>Power grid structure and hierarchy</li>
+                        <li>Power and ground ring placement</li>
+                        <li>Power rail width and spacing</li>
+                        <li>Decoupling capacitor placement</li>
+                        <li>IR drop analysis and mitigation</li>
+                    </ul>
+                    <p>Power planning must account for various factors, including current consumption patterns, voltage drop limits, and electromigration concerns. The power network must deliver adequate voltage under all operating conditions while minimizing area overhead.</p>
+                    <p>Advanced power planning techniques include multi-voltage domain design, power gating for leakage reduction, and dynamic voltage scaling. These techniques help optimize power consumption while maintaining performance requirements.</p>
+                    <p>Power planning is typically performed early in the physical design flow, as it significantly impacts floor planning and block placement decisions.</p>
+                `
+            },
+            'placement': {
+                title: 'Placement',
+                content: `
+                    <p>Placement is the process of positioning standard cells and macros within the floor plan to optimize timing, power, and area. This complex optimization problem requires balancing multiple competing objectives while adhering to design rules.</p>
+                    <p>The placement process typically follows these steps:</p>
+                    <ul>
+                        <li>Initial placement using analytical or force-directed methods</li>
+                        <li>Legalization to ensure all cells are placed on valid grid locations</li>
+                        <li>Timing-driven optimization to improve critical paths</li>
+                        <li>Congestion analysis and mitigation</li>
+                        <li>Power network optimization</li>
+                    </ul>
+                    <p>Modern placement tools use sophisticated algorithms including machine learning techniques to achieve near-optimal solutions for complex designs with millions of cells. The placement quality directly impacts routing congestion, timing closure, and ultimately the chip's performance.</p>
+                    <p>Designers often iterate between placement and optimization, adjusting constraints or making manual edits to address specific timing or congestion issues that automated tools cannot resolve.</p>
+                `
+            },
+            'cts': {
+                title: 'Clock Tree Synthesis (CTS)',
+                content: `
+                    <p>Clock Tree Synthesis (CTS) is the process of creating a balanced clock distribution network that delivers the clock signal to all sequential elements with minimal skew. A well-designed clock tree is critical for meeting timing requirements and ensuring reliable circuit operation.</p>
+                    <p>Key objectives of CTS include:</p>
+                    <ul>
+                        <li>Minimizing clock skew across the design</li>
+                        <li>Meeting clock slew rate requirements</li>
+                        <li>Controlling clock power consumption</li>
+                        <li>Avoiding clock signal integrity issues</li>
+                        <li>Meeting clock latency requirements</li>
+                    </ul>
+                    <p>The CTS process involves:</p>
+                    <ul>
+                        <li>Clock source definition and characterization</li>
+                        <li>Clock buffer insertion and sizing</li>
+                        <li>Clock network topology generation</li>
+                        <li>Clock skew optimization and balancing</li>
+                    </ul>
+                    <p>Modern CTS tools use advanced algorithms to create balanced clock trees while minimizing power and area. Designers may specify clock constraints and exceptions to guide the CTS process and address specific design requirements.</p>
+                    <p>Clock tree quality directly impacts timing closure and overall chip performance, making CTS a critical step in the physical design flow.</p>
+                `
+            },
+            'routing': {
+                title: 'Routing',
+                content: `
+                    <p>Routing creates the physical connections between placed components, implementing the logical netlist in the physical domain. This multi-stage process must satisfy design rules while optimizing timing, signal integrity, and manufacturability.</p>
+                    <p>The routing flow typically includes:</p>
+                    <ul>
+                        <li>Global routing to determine approximate paths and estimate congestion</li>
+                        <li>Detailed routing to create actual metal connections following design rules</li>
+                        <li>Timing optimization through wire sizing and buffer insertion</li>
+                        <li>Signal integrity analysis and fixes</li>
+                        <li>Design rule checking and correction</li>
+                    </ul>
+                    <p>Advanced routing tools use multi-threading and specialized algorithms to handle the complexity of modern designs with multiple metal layers and stringent requirements. The routing process must balance competing objectives such as minimizing wire length, reducing congestion, and meeting timing constraints.</p>
+                    <p>Routing is often the most time-consuming step in the physical design process, especially for large, complex designs with high pin counts and tight timing budgets. Designers may need to iterate between placement and routing to achieve optimal results.</p>
+                `
+            },
+            'sign-off': {
+                title: 'Sign Off',
+                content: `
+                    <p>Sign-off is the final verification phase before tape-out, where the design undergoes comprehensive analysis to ensure it meets all requirements and can be successfully manufactured. This critical phase validates that the chip will function correctly in its target application.</p>
+                    <p>Key sign-off analyses include:</p>
+                    <ul>
+                        <li>Static timing analysis to verify timing requirements</li>
+                        <li>Power analysis to ensure power budgets are met</li>
+                        <li>Signal integrity analysis to prevent noise-related issues</li>
+                        <li>Physical verification to check manufacturing compliance</li>
+                        <li>Reliability analysis to ensure long-term operation</li>
+                    </ul>
+                    <p>Sign-off requires running multiple analysis tools with corner cases representing worst-case operating conditions. Any violations found during sign-off must be fixed before tape-out, which may require design modifications and additional iterations.</p>
+                    <p>The sign-off process generates comprehensive reports that document the design's compliance with requirements. These reports are often required for customer approval and provide assurance that the design meets quality and reliability standards.</p>
+                `
+            },
+            'parasitic-extraction': {
+                title: 'Parasitic Extraction',
+                content: `
+                    <p>Parasitic extraction is the process of identifying and quantifying unintended electrical effects (parasitics) in the physical design. These parasitics, including resistance, capacitance, and inductance, significantly impact circuit performance and must be accurately modeled for sign-off verification.</p>
+                    <p>Types of parasitics extracted include:</p>
+                    <ul>
+                        <li><strong>Resistance:</strong> Wire resistance affecting signal delay and IR drop</li>
+                        <li><strong>Capacitance:</strong> Coupling and ground capacitance affecting timing and power</li>
+                        <li><strong>Inductance:</strong> Wire inductance affecting signal integrity</li>
+                    </ul>
+                    <p>The extraction process involves:</p>
+                    <ul>
+                        <li>Geometry analysis to identify conductor shapes and spacing</li>
+                        <li>Parasitic calculation using field solvers or empirical models</li>
+                        <li>Netlist generation with parasitic information</li>
+                        <li>Format conversion for analysis tools</li>
+                    </ul>
+                    <p>Parasitic extraction is performed at multiple stages in the design flow, with increasing accuracy as the physical design matures. Post-layout extraction provides the most accurate parasitic representation for final sign-off analysis.</p>
+                `
+            },
+            'physical-verification': {
+                title: 'Physical Verification',
+                content: `
+                    <p>Physical verification ensures that the physical layout complies with manufacturing design rules and matches the logical design. This critical verification step prevents manufacturing defects and functional failures that could result from layout errors.</p>
+                    <p>Key aspects of physical verification include:</p>
+                    <ul>
+                        <li><strong>Design Rule Checking (DRC):</strong> Verifies compliance with manufacturing rules</li>
+                        <li><strong>Layout Versus Schematic (LVS):</strong> Ensures layout matches the netlist</li>
+                        <li><strong>Antenna Rules:</strong> Prevents antenna effects during manufacturing</li>
+                        <li><strong>Electromigration Rules:</strong> Ensures reliability under current stress</li>
+                    </ul>
+                    <p>DRC checks for violations such as minimum spacing, width rules, and layer-specific requirements. LVS verifies that the physical connectivity matches the logical netlist, catching missing connections or short circuits.</p>
+                    <p>Physical verification tools provide detailed violation reports that guide designers in fixing issues. Some violations may require design modifications, while others can be resolved through layout adjustments.</p>
+                    <p>Physical verification is typically performed multiple times throughout the design process, with increasingly comprehensive checks as the design approaches tape-out.</p>
+                `
+            },
+            'formal-verification': {
+                title: 'Formal Verification',
+                content: `
+                    <p>Formal verification uses mathematical methods to prove that a design implementation meets its specification without relying on simulation. This rigorous verification approach can find corner-case bugs that might be missed by traditional simulation-based verification.</p>
+                    <p>Types of formal verification include:</p>
+                    <ul>
+                        <li><strong>Equivalence Checking:</strong> Verifies that two implementations are functionally identical</li>
+                        <li><strong>Model Checking:</strong> Verifies properties against all possible input sequences</li>
+                        <li><strong>Theorem Proving:</strong> Mathematically proves design properties</li>
+                    </ul>
+                    <p>Applications of formal verification in ASIC design:</p>
+                    <ul>
+                        <li>RTL-to-gate equivalence checking after synthesis</li>
+                        <li>Verification of optimizations and design changes</li>
+                        <li>Protocol verification for bus interfaces</li>
+                        <li>Security property verification</li>
+                    </ul>
+                    <p>Formal verification provides exhaustive coverage of the design space, unlike simulation which can only test a limited set of scenarios. However, it requires careful formulation of properties and constraints to be effective.</p>
+                    <p>Modern formal verification tools combine automated algorithms with user guidance to efficiently verify complex designs, making formal methods an essential part of a comprehensive verification strategy.</p>
+                `
+            },
+            'static-timing-analysis': {
+                title: 'Static Timing Analysis (STA)',
+                content: `
+                    <p>Static Timing Analysis (STA) verifies that a design meets timing requirements without simulating its operation. This efficient analysis method calculates worst-case timing paths to ensure that the design will function correctly at the target frequency.</p>
+                    <p>Key concepts in STA include:</p>
+                    <ul>
+                        <li><strong>Setup Time:</strong> Minimum time before clock edge for data stability</li>
+                        <li><strong>Hold Time:</strong> Minimum time after clock edge for data stability</li>
+                        <li><strong>Clock Skew:</strong> Variation in clock arrival times</li>
+                        <li><strong>Timing Paths:</strong> Signal propagation paths between sequential elements</li>
+                    </ul>
+                    <p>The STA process involves:</p>
+                    <ul>
+                        <li>Timing model extraction for all cells and interconnects</li>
+                        <li>Timing path identification and analysis</li>
+                        <li>Slack calculation for setup and hold requirements</li>
+                        <li>Timing violation reporting and analysis</li>
+                    </ul>
+                    <p>STA is performed at multiple stages in the design flow, with increasing accuracy as the physical design matures. Corner cases representing worst-case operating conditions are analyzed to ensure robust timing performance.</p>
+                    <p>Timing violations found during STA must be fixed through design modifications, constraint adjustments, or optimization techniques. Achieving timing closure is often one of the most challenging aspects of ASIC design.</p>
+                `
+            },
+            'power-analysis': {
+                title: 'Power Analysis & IR Drop',
+                content: `
+                    <p>Power analysis evaluates the power consumption of a design and identifies potential issues related to power delivery. This analysis is critical for ensuring that the chip operates within its power budget and maintains reliable voltage levels throughout operation.</p>
+                    <p>Types of power analysis include:</p>
+                    <ul>
+                        <li><strong>Static Power:</strong> Leakage power consumption when the circuit is idle</li>
+                        <li><strong>Dynamic Power:</strong> Power consumed during switching activity</li>
+                        <li><strong>IR Drop Analysis:</strong> Voltage drop in the power distribution network</li>
+                        <li><strong>Electromigration Analysis:</strong> Reliability issues due to current stress</li>
+                    </ul>
+                    <p>Power analysis techniques include:</p>
+                    <ul>
+                        <li>Vector-based analysis using simulation activity patterns</li>
+                        <li>Probabilistic analysis using statistical activity models</li>
+                        <li>Static analysis for worst-case power estimation</li>
+                        <li>Dynamic analysis for time-varying power consumption</li>
+                    </ul>
+                    <p>IR drop analysis identifies voltage drops in the power distribution network that can cause timing violations or functional failures. Electromigration analysis ensures that metal interconnects can handle the required current density without reliability issues.</p>
+                    <p>Power analysis results guide design decisions such as power grid design, voltage domain definition, and low-power design techniques. Meeting power targets is increasingly important for mobile and battery-powered applications.</p>
+                `
+            }
+        };
+
         // Create animated background elements
         function createAnimatedBackground() {
             const animatedBg = document.getElementById('animatedBg');
@@ -1157,45 +2145,218 @@
             document.getElementById('navMenu').classList.toggle('active');
         });
 
-        // Content sections for navigation
-        const contentSections = ['basics', 'input-files', 'synthesis', 'floor-plan', 'placement', 'routing'];
-        let currentSectionIndex = -1;
+        // Current page tracking
+        let currentPage = null;
+        const pageOrder = ['home', 'about', 'basics', 'synthesis', 'asic-flow', 'physical-design', 'input-files', 'netlist', 'library', 'constraints', 'prn-flow', 'floor-plan', 'power-plan', 'placement', 'cts', 'routing', 'sign-off', 'parasitic-extraction', 'physical-verification', 'formal-verification', 'static-timing-analysis', 'power-analysis'];
+        let currentPageIndex = -1;
 
-        // Navigate to section when grid item is clicked
-        function navigateToSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
+        // Open page function
+        function openPage(pageId) {
+            // Hide hero and contact sections
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('contactSection').style.display = 'none';
             
-            // Show selected section
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.add('active');
-                currentSectionIndex = contentSections.indexOf(sectionId);
+            // Hide grid section
+            document.getElementById('gridSection').style.display = 'none';
+            document.querySelector('.all-topics-section').style.display = 'none';
+            
+            // Show pages container
+            const pagesContainer = document.getElementById('pagesContainer');
+            pagesContainer.classList.add('active');
+            
+            // Update current page
+            currentPage = pageId;
+            currentPageIndex = pageOrder.indexOf(pageId);
+            
+            // Create page content
+            const page = pageContent[pageId];
+            if (page) {
+                pagesContainer.innerHTML = `
+                    <div class="page">
+                        <div class="page-header">
+                            <h2 class="page-title">${page.title}</h2>
+                            <button class="page-close" id="pageClose">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="page-content">
+                            ${page.content}
+                        </div>
+                        <div class="page-nav">
+                            <button class="page-btn" id="prevPageBtn" ${currentPageIndex <= 0 ? 'disabled' : ''}>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="page-indicator">${currentPageIndex + 1} / ${pageOrder.length}</div>
+                            <button class="page-btn" id="nextPageBtn" ${currentPageIndex >= pageOrder.length - 1 ? 'disabled' : ''}>
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
                 
-                // Scroll to section
-                section.scrollIntoView({ behavior: 'smooth' });
+                // Add event listeners for page navigation
+                document.getElementById('pageClose').addEventListener('click', closePage);
+                
+                if (currentPageIndex > 0) {
+                    document.getElementById('prevPageBtn').addEventListener('click', () => {
+                        openPage(pageOrder[currentPageIndex - 1]);
+                    });
+                }
+                
+                if (currentPageIndex < pageOrder.length - 1) {
+                    document.getElementById('nextPageBtn').addEventListener('click', () => {
+                        openPage(pageOrder[currentPageIndex + 1]);
+                    });
+                }
+                
+                // Scroll to top of page
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
-        // Page navigation
-        function navigatePage(direction) {
-            if (currentSectionIndex === -1) {
-                currentSectionIndex = 0;
-            }
+        // Close page function
+        function closePage() {
+            // Show hero and contact sections
+            document.getElementById('heroSection').style.display = 'flex';
+            document.getElementById('contactSection').style.display = 'block';
             
-            currentSectionIndex += direction;
+            // Show grid section
+            document.getElementById('gridSection').style.display = 'grid';
+            document.querySelector('.all-topics-section').style.display = 'block';
             
-            // Wrap around if necessary
-            if (currentSectionIndex < 0) {
-                currentSectionIndex = contentSections.length - 1;
-            } else if (currentSectionIndex >= contentSections.length) {
-                currentSectionIndex = 0;
-            }
+            // Hide pages container
+            document.getElementById('pagesContainer').classList.remove('active');
             
-            navigateToSection(contentSections[currentSectionIndex]);
+            // Reset current page
+            currentPage = null;
+            currentPageIndex = -1;
         }
+
+        // Grid item click handlers
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const pageId = this.getAttribute('data-page');
+                openPage(pageId);
+            });
+        });
+
+        // Hero button handlers
+        document.getElementById('exploreBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            openPage('basics');
+        });
+
+        document.getElementById('browseAllBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            openPage('home');
+        });
+
+        document.getElementById('learnMoreBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ 
+                top: document.getElementById('gridSection').offsetTop - 100, 
+                behavior: 'smooth' 
+            });
+        });
+
+        // Real-time search functionality
+        const searchBox = document.getElementById('searchBox');
+        const searchResults = document.getElementById('searchResults');
+        let searchTimeout;
+
+        function highlightMatch(text, query) {
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+
+        function performRealTimeSearch() {
+            const query = searchBox.value.toLowerCase().trim();
+            
+            if (query === '') {
+                searchResults.style.display = 'none';
+                return;
+            }
+            
+            // Clear previous timeout
+            clearTimeout(searchTimeout);
+            
+            // Add a small delay to avoid too many updates while typing
+            searchTimeout = setTimeout(() => {
+                const results = searchData.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query)
+                );
+                
+                // Display search results
+                if (results.length > 0) {
+                    searchResults.innerHTML = results.map(result => `
+                        <div class="search-result-item" data-id="${result.id}">
+                            <div class="search-result-title">${highlightMatch(result.title, query)}</div>
+                            <div class="search-result-description">${highlightMatch(result.description, query)}</div>
+                        </div>
+                    `).join('');
+                    
+                    // Add click handlers to search results
+                    searchResults.querySelectorAll('.search-result-item').forEach(item => {
+                        item.addEventListener('click', function() {
+                            const pageId = this.getAttribute('data-id');
+                            openPage(pageId);
+                            searchResults.style.display = 'none';
+                            searchBox.value = '';
+                        });
+                    });
+                    
+                    searchResults.style.display = 'block';
+                } else {
+                    searchResults.innerHTML = `
+                        <div class="search-result-item">
+                            <div class="search-result-title">No results found</div>
+                            <div class="search-result-description">Try searching with different keywords.</div>
+                        </div>
+                    `;
+                    searchResults.style.display = 'block';
+                }
+            }, 100); // 100ms delay
+        }
+
+        // Add real-time search event listeners
+        searchBox.addEventListener('input', performRealTimeSearch);
+        searchBox.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                const firstResult = searchResults.querySelector('.search-result-item');
+                if (firstResult) {
+                    firstResult.click();
+                }
+            }
+        });
+
+        // Hide search results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchBox.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Contact form handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Format the WhatsApp message
+            const whatsappMessage = `Name: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
+            
+            // Create WhatsApp URL
+            const whatsappUrl = `https://wa.me/917732002127?text=${whatsappMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form
+            this.reset();
+        });
 
         // Handle navigation links
         document.querySelectorAll('.nav-link, .dropdown-link').forEach(link => {
@@ -1206,11 +2367,11 @@
                 if (href && href.startsWith('#')) {
                     const sectionId = href.substring(1);
                     
-                    // Check if section exists in content sections
-                    if (contentSections.includes(sectionId)) {
-                        navigateToSection(sectionId);
+                    // Check if it's a page
+                    if (pageOrder.includes(sectionId)) {
+                        openPage(sectionId);
                     } else {
-                        // For sections not in content sections, just scroll to the element if it exists
+                        // Scroll to section if it exists
                         const element = document.getElementById(sectionId);
                         if (element) {
                             element.scrollIntoView({ behavior: 'smooth' });
@@ -1219,25 +2380,6 @@
                     
                     // Close mobile menu if open
                     document.getElementById('navMenu').classList.remove('active');
-                }
-            });
-        });
-
-        // Handle hero buttons
-        document.querySelectorAll('.hero-btn, .hero-btn-secondary').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                
-                if (href && href.startsWith('#')) {
-                    const sectionId = href.substring(1);
-                    
-                    if (sectionId === 'basics') {
-                        navigateToSection('basics');
-                    } else if (sectionId === 'about') {
-                        // Scroll to top of page for about
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
                 }
             });
         });
